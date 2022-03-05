@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Precio;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PrecioController extends Controller
 {
@@ -14,7 +15,12 @@ class PrecioController extends Controller
      */
     public function index()
     {
-        return Precio::all();
+        $precios = Precio::all();
+        return response()->json([
+            "data"=>$precios,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
+
     }
 
 
@@ -27,7 +33,11 @@ class PrecioController extends Controller
     public function store(Request $request)
     {
         $precio = Precio::create($request->all());
-        return $precio;
+        return response()->json([
+            "message"=>"El precio ha sido creado correctamente",
+            "data"=>$precio,
+            "status"=>Response::HTTP_CREATED
+        ],Response::HTTP_CREATED);
 
     }
 
@@ -39,7 +49,11 @@ class PrecioController extends Controller
      */
     public function show(Precio $precio)
     {
-        return $precio;
+        return response()->json([
+            "message"=>"El precio ha sido creado correctamente",
+            "data"=>$precio,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 
     /**
@@ -52,7 +66,11 @@ class PrecioController extends Controller
     public function update(Request $request, Precio $precio)
     {
         $precio->update($request->all());
-        return $precio;
+        return response()->json([
+            "message"=>"El precio ha sido creado correctamente",
+            "data"=>$precio,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 
     /**
@@ -64,6 +82,10 @@ class PrecioController extends Controller
     public function destroy(Precio $precio)
     {
         $precio->delete();
-        return $precio;
+        return response()->json([
+            "message"=>"El precio ha sido creado correctamente",
+            "data"=>$precio,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 }
