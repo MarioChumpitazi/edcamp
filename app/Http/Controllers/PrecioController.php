@@ -50,7 +50,6 @@ class PrecioController extends Controller
     public function show(Precio $precio)
     {
         return response()->json([
-            "message"=>"El precio ha sido creado correctamente",
             "data"=>$precio,
             "status"=>Response::HTTP_OK
         ],Response::HTTP_OK);
@@ -67,7 +66,7 @@ class PrecioController extends Controller
     {
         $precio->update($request->all());
         return response()->json([
-            "message"=>"El precio ha sido creado correctamente",
+            "message"=>"El precio ha sido actualizado correctamente",
             "data"=>$precio,
             "status"=>Response::HTTP_OK
         ],Response::HTTP_OK);
@@ -83,7 +82,7 @@ class PrecioController extends Controller
     {
         $precio->delete();
         return response()->json([
-            "message"=>"El precio ha sido creado correctamente",
+            "message"=>"El precio ha sido eliminado correctamente",
             "data"=>$precio,
             "status"=>Response::HTTP_OK
         ],Response::HTTP_OK);

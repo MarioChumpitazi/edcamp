@@ -12,7 +12,7 @@ class Alumno extends Model
         "email",
         "state",
         "peruvian",
-        "assitance",
+        "assistance",
         "phone",
         "idCompany"];
 

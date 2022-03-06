@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class EmpresaController extends Controller
 {
@@ -14,18 +15,13 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $empresas = Empresa::all();
+        return response()->json([
+            "data"=>$empresas,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +31,12 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empresa = Empresa::create($request->all());
+        return response()->json([
+            "message"=>"La empresa ha sido creada correctamente",
+            "data"=>$empresa,
+            "status"=>Response::HTTP_CREATED
+        ],Response::HTTP_CREATED);
     }
 
     /**
@@ -46,19 +47,12 @@ class EmpresaController extends Controller
      */
     public function show(Empresa $empresa)
     {
-        //
+        return response()->json([
+            "data"=>$empresa,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Empresa  $empresa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Empresa $empresa)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +63,12 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, Empresa $empresa)
     {
-        //
+        $empresa->update($request->all());
+        return response()->json([
+            "message"=>"La empresa ha sido actualizada correctamente",
+            "data"=>$empresa,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +79,11 @@ class EmpresaController extends Controller
      */
     public function destroy(Empresa $empresa)
     {
-        //
+        $empresa->delete();
+        return response()->json([
+            "message"=>"La empresa ha sido eliminada correctamente",
+            "data"=>$empresa,
+            "status"=>Response::HTTP_OK
+        ],Response::HTTP_OK);
     }
 }
