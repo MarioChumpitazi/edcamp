@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,11 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::post('login','UserController@login');
+Route::post('register','UserController@register');
 
-Route::apiResource('/precios','PrecioController');
-Route::apiResource('/empresas','EmpresaController');
-Route::apiResource('/alumnos','AlumnoController');
-Route::apiResource('/pagos','PagoController');
+Route::group(['middleware'=>'auth:api'],function(){
+    Route::apiResource('/precios','PrecioController');
+    Route::apiResource('/empresas','EmpresaController');
+    Route::apiResource('/alumnos','AlumnoController');
+    Route::apiResource('/pagos','PagoController');
+});
